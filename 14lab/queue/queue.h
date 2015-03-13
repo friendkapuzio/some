@@ -71,8 +71,7 @@ void Queue<T, C>::pop()
 template<class T, class C>
 bool Queue<T, C>::empty()
 {
-    if(up.empty() && down.empty()) return true;
-    else return false;
+    return (up.empty() && down.empty());
 }
 
 
