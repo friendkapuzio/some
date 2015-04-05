@@ -80,6 +80,7 @@ void Transport<T>::deleteStop(string stop)
     for(auto it=stops[stop].begin(); it!=stops[stop].end(); ++it)
     {
         routes[it->first][it->second].erase(find(routes[it->first][it->second].begin(), routes[it->first][it->second].end(), stop));
+        if(routes[it->first][it->second].empty()) routes[it->first].erase(it->second);
     }
     stops.erase(stop);
 }
