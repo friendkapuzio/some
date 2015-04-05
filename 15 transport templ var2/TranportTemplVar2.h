@@ -76,7 +76,7 @@ void Transport<T>::deleteStop(string stop)
             auto delet = find(iter->second.begin(), iter->second.end(), stop);
             if(delet != iter->second.end())
                 iter->second.erase(delet);
-            if(iter->second.empty() && ++iter==it->second.end()) {--iter; it->second.erase(iter->first); break;}
+            if(iter->second.empty() /*&& ++iter==it->second.end()*/) {/*--iter;*/ it->second.erase(iter->first); break;}
         }
     }
 }
