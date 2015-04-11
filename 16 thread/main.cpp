@@ -20,7 +20,7 @@ void PI()
 {
     double sum=0;
     int block;
-    while(curBlock!=0)
+    while(curBlock>0)
     {
         block=--curBlock;
         for(long j=blocks[block].first; j<blocks[block].second; ++j)
