@@ -14,26 +14,27 @@ std::mutex mutex;
 
 std::pair<int,int> blocks[10];
 
-int curBlock;
+std::atomic<int> curBlock(0);
 
 void PI()
 {
     int block=0;
     if(curBlock!=0)
     {
-        std::unique_lock<std::mutex> lock(mutex);
+        //std::unique_lock<std::mutex> lock(mutex);
         block=--curBlock;
-        lock.unlock();
+        //lock.unlock();
     }
     for(long j=blocks[block].first; j<blocks[block].second; ++j)
     {
-        std::unique_lock<std::mutex> lock(mutex);//, std::defer_lock);
+        double a=(1.0/pow(16.0, j))*(8.0/(8*j+2)+4.0/(8*j+3)+4.0/(8*j+4)-1.0/(8*j+7))/2;
+     //   std::unique_lock<std::mutex> lock(mutex);//, std::defer_lock);
 //        lock.lock();
-        pi = pi + (1.0/pow(16.0, j))*(8.0/(8*j+2)+4.0/(8*j+3)+4.0/(8*j+4)-1.0/(8*j+7))/2;
+        pi = pi + a;
 //        int a = -4;
 //        if((j+1)%2 != 0) a = 4;
 //        pi = pi + (double)a/m;
-        lock.unlock();
+       // lock.unlock();
     }
 
 }
@@ -48,7 +49,7 @@ int main()
     std::cin>>N;
     for (int i=0; i<N; ++i)
     {
-        blocks[i]=std::make_pair(200000*i/N, 200000*(i+1)/N);
+        blocks[i]=std::make_pair(2000000*i/N, 2000000*(i+1)/N);
         ++curBlock;
     }
     
