@@ -25,18 +25,15 @@ void PI()
         block=--curBlock;
         //lock.unlock();
     }
+    double sum=0;
     for(long j=blocks[block].first; j<blocks[block].second; ++j)
     {
-        double a=(1.0/pow(16.0, j))*(8.0/(8*j+2)+4.0/(8*j+3)+4.0/(8*j+4)-1.0/(8*j+7))/2;
-     //   std::unique_lock<std::mutex> lock(mutex);//, std::defer_lock);
-//        lock.lock();
-        pi = pi + a;
-//        int a = -4;
-//        if((j+1)%2 != 0) a = 4;
-//        pi = pi + (double)a/m;
-       // lock.unlock();
+        sum+=(1.0/pow(16.0, j))*(8.0/(8*j+2)+4.0/(8*j+3)+4.0/(8*j+4)-1.0/(8*j+7))/2;
     }
-
+    std::unique_lock<std::mutex> lock(mutex);//, std::defer_lock);
+    //        lock.lock();
+    pi = pi + sum;
+    lock.unlock();
 }
 
 
@@ -49,7 +46,7 @@ int main()
     std::cin>>N;
     for (int i=0; i<N; ++i)
     {
-        blocks[i]=std::make_pair(2000000*i/N, 2000000*(i+1)/N);
+        blocks[i]=std::make_pair(1400000*i/N, 1400000*(i+1)/N);
         ++curBlock;
     }
     
