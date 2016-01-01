@@ -66,6 +66,7 @@ int main()
 	}
 	for (int i = 2; i < 5; ++i)
 		std::cout << max[i]<<" ";
+	delete[] numbers;
 	system("pause");
 	return 0;
 }
